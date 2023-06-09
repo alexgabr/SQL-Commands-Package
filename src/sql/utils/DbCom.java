@@ -3,7 +3,7 @@
 //2023
 //
 
-package sqlUtils;
+package sql.utils;
 
 public class DbCom {
     // select
@@ -17,11 +17,11 @@ public class DbCom {
 
     // insert
     public static String insert(String table, String values) {
-        return "INSERT INTO " + table + "VALUES(" + values + ")";
+        return "INSERT INTO " + table + " VALUES " + values;
     }
 
     public static String insertSpecColumns(String table, String columns, String values) {
-        return "INSERT INTO " + table + "(" + columns + ")" + " VALUES(" + values + ")";
+        return "INSERT INTO " + table + "(" + columns + ")" + " VALUES " + values;
     }
 
     // alter table
@@ -33,11 +33,12 @@ public class DbCom {
     public static String updateRows(String table, String column, String rowValue, String valueDataType) {
         String ret = "";
 
-        if (valueDataType == "int" || valueDataType == "INT") {
+        if (valueDataType.equals("int") || valueDataType.equals("INT")) {
             ret = "UPDATE " + table + " SET " + column + " = " + Integer.parseInt(rowValue);
-        } else if (valueDataType == "decimal" || valueDataType == "DECIMAL") {
+        } else if (valueDataType.equals("decimal") || valueDataType.equals("DECIMAL")) {
             ret = "UPDATE " + table + " SET " + column + " = " + Double.parseDouble(rowValue);
-        } else if (valueDataType == "date" || valueDataType == "DATE") {
+        } else if (valueDataType.equals("date") || valueDataType.equals("DATE") || valueDataType.equals("varchar")
+                || valueDataType.equals("VARCHAR")) {
             ret = "UPDATE " + table + " SET " + column + " = " + rowValue;
         } else {
             System.out.println("ERROR");
