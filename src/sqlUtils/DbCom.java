@@ -1,4 +1,9 @@
-package sqlCom;
+//
+//Copyright Alexandru Vrincianu
+//2023
+//
+
+package sqlUtils;
 
 public class DbCom {
     // select
@@ -7,7 +12,7 @@ public class DbCom {
     }
 
     public static String select(String columns, String table, String where) {
-        return "SELECT " + columns + " FROM " + table + " WHERE " + where;
+        return select(columns, table) + " WHERE " + where;
     }
 
     // insert
@@ -15,17 +20,13 @@ public class DbCom {
         return "INSERT INTO " + table + "VALUES(" + values + ")";
     }
 
-    public static String insert(String table, String columns, String values) {
+    public static String insertSpecColumns(String table, String columns, String values) {
         return "INSERT INTO " + table + "(" + columns + ")" + " VALUES(" + values + ")";
     }
 
     // alter table
     public static String rename(String table, String columnName, String newName) {
         return "ALTER TABLE " + table + " RENAME " + columnName + " TO " + newName;
-    }
-
-    public static String rename(String table, String columnName, String newName, String where) {
-        return "ALTER TABLE " + table + " RENAME " + columnName + " TO " + newName + " WHERE " + where;
     }
 
     // update
@@ -43,5 +44,18 @@ public class DbCom {
         }
 
         return ret;
+    }
+
+    public static String updateRows(String table, String column, String rowValue, String valueDataType, String where) {
+        return updateRows(table, column, rowValue, valueDataType) + " WHERE " + where;
+    }
+
+    // delete
+    public static String deleteAllRows(String table) {
+        return "DELETE FROM " + table;
+    }
+
+    public static String deleteRow(String table, String where) {
+        return deleteAllRows(table) + " WHERE " + where;
     }
 }
